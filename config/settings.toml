@@ -1,0 +1,132 @@
+# Personal Finance Dashboard settings. No balances or account numbers here; this file syncs to OneDrive.
+
+[paths]
+data_dir = 'C:\Users\<you>\FinanceData'
+inbox_dir = 'G:\Mi unidad\Finance Inbox'
+database = 'finance.db'
+snapshots_csv = 'investment-snapshots.csv'
+adjustments_csv = 'adjustments.csv'
+
+[tax]
+# ISR withholding on SOFIPO interest: annual rate on principal, 360-day basis (2026).
+isr_rate = 0.009
+day_basis = 360
+
+[nu]
+# Only these Cajitas count. The rest are spending envelopes.
+cajitas = ["Cajita Ahorro", "Fondo de Emergencia", "Inversión", "Retiro"]
+
+# Money Manager account names -> type. in_net_worth = counted in net worth.
+[accounts."Card A"]
+type = "credit_card"
+in_net_worth = false
+[accounts."Card B"]
+type = "credit_card"
+in_net_worth = false
+[accounts."Card C"]
+type = "credit_card"
+in_net_worth = false
+[accounts."Card D"]
+type = "credit_card"
+in_net_worth = false
+[accounts."Nubank"]
+type = "bank"
+in_net_worth = false
+[accounts."Payroll Account"]
+type = "bank"
+in_net_worth = false
+[accounts."Cash"]
+type = "bank"
+in_net_worth = false
+[accounts."Allianz PPR"]
+type = "retirement"
+in_net_worth = true
+[accounts."FINSUS"]
+type = "sofipo_fixed"
+in_net_worth = true
+[accounts."GBM"]
+type = "variable"
+in_net_worth = true
+
+[checks]
+sum_tolerance = 1.0         # pesos: parts must add up to the platform total within this
+gain_pct_tolerance = 0.0005  # gain % is shown rounded on screen
+interest_tolerance = 1.0     # pesos: deposit interest shown vs. calculated
+jump_warn_pct = 0.20         # warn if a platform total moves more than this vs. last month
+reconcile_gap_mxn = 500      # flag when derived contributions differ from logged transfers by more
+
+# --- Investment accounts: one block each ------------------------------------------------------
+# To open an account: copy a block, change the name (exactly as in the screenshots/snapshot file).
+# To close one: status = "closed" and closed = "YYYY-MM-DD". Its history stays; screenshots stop being expected.
+# type:    sofipo_fixed | sofipo_on_demand | variable | retirement | manual_asset (which Inversiones tab)
+# returns: how its monthly return is measured
+#          gain_change = change in the gains the app shows; interest = deposit payouts + on-demand interest after ISR;
+#          statement = contributions from the latest statement; estimated = no return data, the whole change counts;
+#          revaluation = manual assets (the change is a revaluation, not a return)
+# mm_account: its Money Manager account, for checking transfers ("" if none)
+# opened / closed: dates, "" if unknown or still open
+
+[platforms."Nu"]
+type = "sofipo_on_demand"
+returns = "gain_change"
+mm_account = ""
+status = "open"
+opened = ""
+closed = ""
+
+[platforms."FINSUS"]
+type = "sofipo_fixed"
+returns = "interest"
+mm_account = "FINSUS"
+status = "open"
+opened = ""
+closed = ""
+
+[platforms."Kubo Financiero"]
+type = "sofipo_fixed"
+returns = "interest"
+mm_account = ""
+status = "open"
+opened = ""
+closed = ""
+
+[platforms."GBM"]
+type = "variable"
+returns = "gain_change"
+mm_account = "GBM"
+status = "open"
+opened = ""
+closed = ""
+
+[platforms."Bitso"]
+type = "variable"
+returns = "estimated"
+mm_account = ""
+status = "open"
+opened = ""
+closed = ""
+
+[platforms."Allianz PPR"]
+type = "retirement"
+returns = "statement"
+mm_account = "Allianz PPR"
+status = "open"
+opened = ""
+closed = ""
+
+[platforms."Profuturo"]
+type = "retirement"
+returns = "estimated"
+mm_account = ""
+status = "open"
+opened = ""
+closed = ""
+
+[platforms."Manual"]
+# Car and "Activos" (appliances and furniture), valued by hand.
+type = "manual_asset"
+returns = "revaluation"
+mm_account = ""
+status = "open"
+opened = ""
+closed = ""

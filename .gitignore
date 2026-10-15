@@ -1,0 +1,22 @@
+.env
+.tmp/
+__pycache__/
+*.pyc
+.venv/
+.pytest_cache/
+
+# Real financial data must never be committed. It lives in C:\Users\<you>\FinanceData\.
+# These rules are a second safety net in case a data file lands here by mistake.
+*.db
+*.sqlite
+*.csv
+*.xlsx
+*.xls
+*.png
+*.jpg
+*.jpeg
+*.heic
+*.HEIC
+data/
+# Fake test data is the only exception.
+!tests/fixtures/**
